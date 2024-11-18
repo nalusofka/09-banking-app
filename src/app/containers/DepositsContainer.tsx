@@ -6,12 +6,13 @@ import Button from "../ui/components/Button";
 import DepositsLayout from "../ui/layouts/DepositsLayout";
 import Title from "../ui/components/Title";
 import Body from "../ui/components/Body";
+import { dinHeader } from "../core/utils/headerUtils";
 
 const DepositsContainer: React.FC = () => {
-  const { handleDeposit, state } = useTransaction();
+  const { handleDeposit } = useTransaction();
 
   const [depositRequest, setDepositRequest] = useState<DepositRequest>({
-    dinHeader: { device: "", language: "", uuid: "", ip: "", transactionTime: "" },
+    dinHeader,
     dinBody: { accountNumber: "", amount: 0, type: "", username: "" },
   });
 
@@ -43,17 +44,6 @@ const DepositsContainer: React.FC = () => {
         <Input color="primary" type="number" id="amount" name="amount" value={depositRequest.dinBody.amount === 0 ? '' : depositRequest.dinBody.amount} onChange={handleDepositChange} required label="Monto" />
         <Button type="submit">Depositar</Button>
       </form>
-
-      {state.loading && <p>Loading...</p>}
-      {state.error && <p style={{ color: 'red' }}>Error: {state.error}</p>}
-      {state.transaction && (
-        <div>
-          <h3>Transaction Result</h3>
-          <p>ID: {state.transaction.transactionId}</p>
-          <p>Status: {state.transaction.status}</p>
-          <p>Message: {state.transaction.message}</p>
-        </div>
-      )}
     </DepositsLayout>
   );
 };

@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HTTP_METHODS } from "../../constants/httpMethods";
 
 export const getAuthToken = (state: any) => state.auth.token;
 
-export const http = async (url: string, method: HTTP_METHODS, data?: any, token?: string) => {
+export const http = async (url: string, method: HTTP_METHODS, data?: React.ReactNode, token?: string) => {
   const headers: HeadersInit = {
     "Content-Type": "application/json",
   };
@@ -24,7 +25,7 @@ export const http = async (url: string, method: HTTP_METHODS, data?: any, token?
     }
 
     return await response.json();
-  } catch (error: any) {
-    throw new Error(error?.message ?? "Something went wrong");
+  } catch (error) {
+    throw new Error(error as string ?? "Something went wrong");
   }
 };

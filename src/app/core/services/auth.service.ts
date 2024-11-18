@@ -3,7 +3,7 @@ import { AuthCreateRequest, AuthResponse, RegisterCreateRequest } from '@interfa
 import { http } from './generals/http';
 
 const API_URL = import.meta.env.VITE_API_URL;
-const SECREY_KEY = import.meta.env.VITE_SECRET_KEY;
+const SYMMETRIC_KEY = import.meta.env.VITE_SYMMETRIC_KEY;
 const INITIALIZATION_VECTOR = import.meta.env.VITE_INITIALIZATION_VECTOR;
 
 export const login = async (request: AuthCreateRequest, token?: string): Promise<AuthResponse> => {
@@ -14,7 +14,7 @@ export const login = async (request: AuthCreateRequest, token?: string): Promise
       uuid: request.dinHeader.uuid || '',
       ip: request.dinHeader.ip || '',
       transactionTime: new Date().toISOString(),
-      symmetricKey: SECREY_KEY,
+      symmetricKey: SYMMETRIC_KEY,
       initializationVector: INITIALIZATION_VECTOR,
     },
     dinBody: {
@@ -33,7 +33,7 @@ export const register = async (request: RegisterCreateRequest, token?: string): 
       uuid: request.dinHeader.uuid || '',
       ip: request.dinHeader.ip || '',
       transactionTime: new Date().toISOString(),
-      symmetricKey: SECREY_KEY,
+      symmetricKey: SYMMETRIC_KEY,
       initializationVector: INITIALIZATION_VECTOR,
     },
     dinBody: {

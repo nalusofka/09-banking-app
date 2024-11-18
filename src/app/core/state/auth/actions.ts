@@ -1,4 +1,4 @@
-import { AuthCredentials, AuthResponse, RegisterCreateRequest, RegisterCredentials } from '@interfaces/auth';
+import { AuthCreateRequest, AuthResponse, RegisterCreateRequest } from '@interfaces/auth';
 
 export const loginActions = {
     LOGIN_REQUEST: 'LOGIN_REQUEST',
@@ -10,7 +10,7 @@ export const loginActions = {
     LOGOUT: 'LOGOUT',
 }
 
-export const loginRequest = (credentials: AuthCredentials) => ({
+export const loginRequest = (credentials: AuthCreateRequest) => ({
   type: loginActions.LOGIN_REQUEST,
   payload: credentials,
 });

@@ -1,8 +1,7 @@
 import React from 'react';
 import Body from '../Body';
 import Title from '../Title';
-import { PiUserCircleLight } from "react-icons/pi";
-
+import Avatar from 'react-avatar';
 import './style.scss';
 
 interface UserInfoProps {
@@ -11,10 +10,10 @@ interface UserInfoProps {
   username?: string;
 }
 
-const UserInfo: React.FC<UserInfoProps> = ({ name = 'Nalu', lastname = 'Munoz', username = 'nalumunoz' }) => {
+const UserInfo: React.FC<UserInfoProps> = ({ name, lastname, username}) => {
   return (
     <div className='user-info'>
-      <PiUserCircleLight size={50} />
+      <Avatar name={name} round='100px' color='#d1d1d1' size='60' />
       <div className='user-info_content'>
         <Title as="h3" color='primary'>{name} {lastname}</Title>
         <Body color='primary'>{username}</Body>

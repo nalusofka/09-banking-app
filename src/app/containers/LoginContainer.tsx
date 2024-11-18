@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthCredentials } from "@interfaces/auth";
-import { useAuth } from "../core/hooks/useAuth";
 import Button from "../ui/components/Button";
 import Input from "../ui/components/Input";
 import LoginLayout from "../ui/layouts/LoginLayout";
 import Title from "../ui/components/Title";
 import Body from "../ui/components/Body";
 import { Link } from "react-router-dom";
+import { useAuth } from "../core/hooks/useAuth";
 
 const LoginContainer: React.FC = () => {
   const navigate = useNavigate();
@@ -26,14 +26,13 @@ const LoginContainer: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const isSuccess = await handleLogin(credentials);
-  
+
     if (isSuccess) {
-      navigate("/inicio"); 
+      navigate("/inicio");
     } else {
       setErrorMessage("Error al iniciar sesión. Verifica tus credenciales.");
     }
   };
-  
 
   return (
     <LoginLayout>

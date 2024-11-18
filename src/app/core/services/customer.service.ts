@@ -1,86 +1,42 @@
-import { CustomerRequest, CustomerCreateRequest, CustomerGetRequest, CustomerDeleteRequest } from '@interfaces/customer';
-import { http } from './generals/http';
-import { HTTP_METHODS } from '@core/constants/httpMethods';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { CustomerGetRequest } from '../interfaces/customer';
 
-const API_URL = process.env.VITE_API_URL;
-const SECREY_KEY = process.env.VITE_SECRET_KEY;
-const INITIALIZATION_VECTOR = process.env.VITE_INITIALIZATION_VECTOR;
+const API_URL = import.meta.env.VITE_API_URL;
+const SYMMETRIC_KEY = import.meta.env.VITE_SYMMETRIC_KEY;
+const INITIALIZATION_VECTOR = import.meta.env.VITE_INITIALIZATION_VECTOR;
 
-const makeCustomerRequest = async (url: string, payload: CustomerRequest | CustomerCreateRequest | CustomerGetRequest | CustomerDeleteRequest) => {
+const makeCustomerRequest = async (url: string, payload: any) => {
   try {
-    const response = await http(`${API_URL}${url}`, HTTP_METHODS.POST, payload);
-    return response.json();
-  } catch (error: any) {
-    throw new Error(`Error en la solicitud de cliente: ${error}`);
-  }
-};
+    const response = await fetch(`${API_URL}${url}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+      body: JSON.stringify(payload),
+    });
 
-export const createCustomer = async (request: CustomerCreateRequest) => {
-  const payload = {
-    dinHeader: {
-      device: request.dinHeader.device,
-      language: request.dinHeader.language,
-      uuid: request.dinHeader.uuid,
-      ip: request.dinHeader.ip,
-      transactionTime: new Date().toISOString(),
-      symmetricKey: SECREY_KEY,
-      initializationVector: INITIALIZATION_VECTOR,
-    },
-    dinBody: {},
-  };
-  //@ts-ignore
-  return makeCustomerRequest('/api/v1/public/customers/create', payload);
+    return await response.json();;
+  } catch (error: any) {
+    throw new Error(`Error en la solicitud de cliente: ${error.message}`);
+  }
 };
 
 export const getCustomer = async (request: CustomerGetRequest) => {
   const payload = {
     dinHeader: {
-      device: request.dinHeader.device,
-      language: request.dinHeader.language,
-      uuid: request.dinHeader.uuid,
-      ip: request.dinHeader.ip,
+      device: request.dinHeader.device || '',
+      language: request.dinHeader.language || '',
+      uuid: request.dinHeader.uuid || '',
+      ip: request.dinHeader.ip || '',
       transactionTime: new Date().toISOString(),
-      symmetricKey: SECREY_KEY,
+      symmetricKey: SYMMETRIC_KEY,
       initializationVector: INITIALIZATION_VECTOR,
     },
-    dinBody: {
-      id: request.dinBody.id,
-    },
+    dinBody: { id: request.dinBody.id },
   };
-  return makeCustomerRequest('/api/v1/public/customers/get', payload);
-};
 
-export const deleteCustomer = async (request: CustomerDeleteRequest) => {
-  const payload = {
-    dinHeader: {
-      device: request.dinHeader.device,
-      language: request.dinHeader.language,
-      uuid: request.dinHeader.uuid,
-      ip: request.dinHeader.ip,
-      transactionTime: new Date().toISOString(),
-      symmetricKey: SECREY_KEY,
-      initializationVector: INITIALIZATION_VECTOR,
-    },
-    dinBody: {
-      id: request.dinBody.id,
-    },
-  };
-  return makeCustomerRequest('/api/v1/public/customers/delete', payload);
-};
+  const response = await makeCustomerRequest('/api/v1/public/customers/get', payload);
 
-export const customerRequest = async (request: CustomerRequest) => {
-  const payload = {
-    dinHeader: {
-      device: request.dinHeader.device,
-      language: request.dinHeader.language,
-      uuid: request.dinHeader.uuid,
-      ip: request.dinHeader.ip,
-      transactionTime: new Date().toISOString(),
-      symmetricKey: SECREY_KEY,
-      initializationVector: INITIALIZATION_VECTOR,
-    },
-    dinBody: {},
-  };
-  //@ts-ignore
-  return makeCustomerRequest('/api/v1/public/customers', payload);
+  return response;
 };

@@ -10,6 +10,7 @@ import RegisterLayout from "../ui/layouts/RegisterLayout";
 
 const RegisterContainer: React.FC = () => {
   const navigate = useNavigate();
+
   const [credentials, setCredentials] = useState<RegisterCredentials>({
     username: "",
     password: "",
@@ -17,7 +18,7 @@ const RegisterContainer: React.FC = () => {
     lastname: "",
     roles: ["CUSTOMER"]
   });
-  const { handleRegister, state } = useAuth(); 
+  const { handleRegister } = useAuth(); 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -45,13 +46,7 @@ const RegisterContainer: React.FC = () => {
         <Button type="submit">Registrarme</Button>
       </form>
       <br />
-      <Body>
-        Si ya tienes cuenta, puedes{" "}
-        <Link to="/login" className="link">
-          iniciar sesión
-        </Link>
-      </Body>
-      {state.error && <Body className="error-message">Error al registrarse, intenta de nuevo</Body>}
+      <Body>Si ya tienes cuenta, puedes <Link to="/login" className="link">Iniciar sesión</Link></Body>
     </RegisterLayout>
   );
 };

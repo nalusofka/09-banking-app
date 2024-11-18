@@ -8,17 +8,6 @@ export interface Account {
   ownerId: string;
 }
 
-export interface AccountSummary {
-  accountNumber: string;
-  accountType: 'checking' | 'savings' | 'credit';
-  balance: number;
-}
-
-export interface UpdateAccountBalance {
-  accountId: string;
-  newBalance: number;
-}
-
 export interface DinHeader {
   device: string;
   language: string;

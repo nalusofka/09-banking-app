@@ -6,18 +6,13 @@ import Button from "../ui/components/Button";
 import Title from "../ui/components/Title";
 import Body from "../ui/components/Body";
 import WithDrawLayout from "../ui/layouts/WithDrawLayout";
+import { dinHeader } from "../core/utils/headerUtils";
 
 const WithDrawContainer: React.FC = () => {
-  const { handleWithdraw, state } = useTransaction();
+  const { handleWithdraw } = useTransaction();
 
   const [withdrawRequest, setWithdrawRequest] = useState<WithdrawRequest>({
-    dinHeader: {
-      device: "",
-      language: "",
-      uuid: "",
-      ip: "",
-      transactionTime: "",
-    },
+    dinHeader,
     dinBody: { username: "", accountNumber: "", amount: 0 },
   });
 
@@ -48,17 +43,6 @@ const WithDrawContainer: React.FC = () => {
         <Input color="primary" type="number" id="amount" name="amount" value={withdrawRequest.dinBody.amount === 0 ? "" : withdrawRequest.dinBody.amount} onChange={handleWithdrawChange} required label="Monto" />
         <Button type="submit">Retirar</Button>
       </form>
-
-      {state.loading && <p>Loading...</p>}
-      {state.error && <p style={{ color: "red" }}>Error: {state.error}</p>}
-      {state.transaction && (
-        <div>
-          <h3>Transaction Result</h3>
-          <p>ID: {state.transaction.transactionId}</p>
-          <p>Status: {state.transaction.status}</p>
-          <p>Message: {state.transaction.message}</p>
-        </div>
-      )}
     </WithDrawLayout>
   );
 };

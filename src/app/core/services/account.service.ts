@@ -3,7 +3,7 @@ import { http } from './generals/http';
 import { HTTP_METHODS } from '../constants/httpMethods';
 
 const API_URL = import.meta.env.VITE_API_URL;
-const SECREY_KEY = import.meta.env.VITE_SECRET_KEY;
+const SYMMETRIC_KEY = import.meta.env.VITE_SYMMETRIC_KEY;
 const INITIALIZATION_VECTOR = import.meta.env.VITE_INITIALIZATION_VECTOR;
 
 const makeAccountRequest = async (url: string, payload: BankAccountCreateRequest | BankAccountGetRequest | BankAccountDeleteRequest | BankAccountCustomerGetRequest) => {
@@ -23,7 +23,7 @@ export const createBankAccount = async (request: BankAccountCreateRequest) => {
       uuid: request.dinHeader.uuid || '',
       ip: request.dinHeader.ip || '',
       transactionTime: new Date().toISOString(),
-      symmetricKey: SECREY_KEY,
+      symmetricKey: SYMMETRIC_KEY,
       initializationVector: INITIALIZATION_VECTOR,
     },
     dinBody: {
@@ -42,7 +42,7 @@ export const getBankAccount = async (request: BankAccountGetRequest) => {
       uuid: request.dinHeader.uuid || '',
       ip: request.dinHeader.ip || '',
       transactionTime: new Date().toISOString(),
-      symmetricKey: SECREY_KEY,
+      symmetricKey: SYMMETRIC_KEY,
       initializationVector: INITIALIZATION_VECTOR,
     },
     dinBody: {
@@ -60,7 +60,7 @@ export const deleteBankAccount = async (request: BankAccountDeleteRequest) => {
       uuid: request.dinHeader.uuid || '',
       ip: request.dinHeader.ip || '',
       transactionTime: new Date().toISOString(),
-      symmetricKey: SECREY_KEY,
+      symmetricKey: SYMMETRIC_KEY,
       initializationVector: INITIALIZATION_VECTOR,
     },
     dinBody: {
@@ -78,7 +78,7 @@ export const getCustomerAccounts = async (request: BankAccountCustomerGetRequest
       uuid: request.dinHeader.uuid || '',
       ip: request.dinHeader.ip || '',
       transactionTime: new Date().toISOString(),
-      symmetricKey: SECREY_KEY,
+      symmetricKey: SYMMETRIC_KEY,
       initializationVector: INITIALIZATION_VECTOR,
     },
     dinBody: {

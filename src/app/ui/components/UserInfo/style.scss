@@ -2,12 +2,8 @@
 @use '../../styles/mixins' as mix;
 
 .user-info {
-  background: var.$color-light-gray2;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   display: grid;
   grid-template-columns: 1fr auto;
-  padding: 20px;
   text-decoration: inherit;
   transition: transform 0.3s ease;
   display: flex;
