@@ -16,7 +16,7 @@ const makeCustomerRequest = async (url: string, payload: any) => {
       body: JSON.stringify(payload),
     });
 
-    return await response.json();;
+    return await response.json();
   } catch (error: any) {
     throw new Error(`Error en la solicitud de cliente: ${error.message}`);
   }

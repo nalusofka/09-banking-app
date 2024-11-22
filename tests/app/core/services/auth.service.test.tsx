@@ -6,7 +6,7 @@ vi.mock('../../../../src/app/core/services/generals/http', () => ({
   http: vi.fn(),
 }));
 
-describe('Auth Service', () => {
+describe('Test de servicio de autenticación', () => {
   const mockAPI_URL = 'http://3.81.252.14:8080';
   const mockSymmetricKey = 'MTIzNDU2Nzg5MTIzNDU2Nw==';
   const mockInitializationVector = 'MTIzNDU2Nzg5MTIzNDU2Nw==';
@@ -46,7 +46,7 @@ describe('Auth Service', () => {
     expect(result).toEqual(mockResponse);
   });
 
-  it('should call register with correct payload and return data on success', async () => {
+  it('deberia llamar a register con el payload correcto y devolver datos en caso de éxito', async () => {
     const mockRequest = {
       dinHeader: { device: 'Device2', language: 'es', uuid: '5678', ip: '192.168.0.1' },
       dinBody: { username: 'newuser', password: 'password123', name: 'Test', lastname: 'User', roles: ['admin'] },
@@ -84,27 +84,27 @@ describe('Auth Service', () => {
     expect(result).toEqual(mockResponse);
   });
 
-  it('should handle errors during login', async () => {
+  it('deberia manejar errores durante el login', async () => {
     const mockRequest = {
       dinHeader: { device: '', language: '', uuid: '', ip: '' },
       dinBody: { username: '', password: '' },
     };
 
-    const mockError = new Error('Login failed');
+    const mockError = new Error('Inicio de sesión fallido');
     (http as vi.Mock).mockRejectedValue(mockError);
 
-    await expect(login(mockRequest)).rejects.toThrow('Login failed');
+    await expect(login(mockRequest)).rejects.toThrow('Inicio de sesión fallido');
   });
 
-  it('should handle errors during register', async () => {
+  it('deberia manejar errores durante el registro', async () => {
     const mockRequest = {
       dinHeader: { device: '', language: '', uuid: '', ip: '' },
       dinBody: { username: '', password: '', name: '', lastname: '', roles: [] },
     };
 
-    const mockError = new Error('Register failed');
+    const mockError = new Error('Registro fallido');
     (http as vi.Mock).mockRejectedValue(mockError);
 
-    await expect(register(mockRequest)).rejects.toThrow('Register failed');
+    await expect(register(mockRequest)).rejects.toThrow('Registro fallido');
   });
 });
