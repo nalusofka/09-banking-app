@@ -1,8 +1,8 @@
 import React from "react";
-import Card from "../ui/components/Card";
-import TransactionsLayout from "../ui/layouts/TransactionsLayout";
-import Title from "../ui/components/Title";
-import Body from "../ui/components/Body"
+import Body from "@components/Body";
+import Card from "@components/Card";
+import Title from "@components/Title";
+import TransactionsLayout from "@layouts/TransactionsLayout";
 
 const TransactionsContainer: React.FC = () => {
   return (

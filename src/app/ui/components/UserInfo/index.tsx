@@ -13,7 +13,7 @@ interface UserInfoProps {
 const UserInfo: React.FC<UserInfoProps> = ({ name, lastname, username}) => {
   return (
     <div className='user-info'>
-      <Avatar name={name} round='100px' color='#d1d1d1' size='60' />
+      <Avatar name={`${name} ${lastname}`} round='100px' color='#012b73' size='60' />
       <div className='user-info_content'>
         <Title as="h3" color='primary'>{name} {lastname}</Title>
         <Body color='primary'>{username}</Body>

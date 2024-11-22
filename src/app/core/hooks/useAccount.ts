@@ -1,9 +1,9 @@
+import { useContext } from 'react';
+import { AppContext } from '@state/AppContext';
 import { useCreateBankAccount } from './account/useCreateBankAccount';
 import { useFetchBankAccount } from './account/useFetchBankAccount';
-import { useRemoveAccount } from './account/useRemoveAccount';
 import { useFetchCustomerAccounts } from './account/useFetchCustomerAccounts';
-import { AppContext } from '../../core/state/AppContext';
-import { useContext } from 'react';
+import { useRemoveAccount } from './account/useRemoveAccount';
 
 export const useAccount = () => {
   const { state } = useContext(AppContext)!;

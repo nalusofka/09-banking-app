@@ -1,10 +1,10 @@
 import { useCallback } from "react";
+import { createBankAccount } from "@services/account.service";
+import { dinHeader } from "@utils/headerUtils";
+import { register } from "@services/auth.service";
+import { RegisterCredentials, RegisterCreateRequest, BankAccountCreateRequest, AuthResponse } from "@interfaces/auth";
+import { registerRequest, registerSuccess, registerFailure } from "@state/auth/actions";
 import useAuthHandler from "./useAuthHandler";
-import { registerRequest, registerSuccess, registerFailure } from "../../state/auth/actions";
-import { register } from "../../services/auth.service";
-import { createBankAccount } from "../../services/account.service";
-import { RegisterCredentials, RegisterCreateRequest, BankAccountCreateRequest, AuthResponse } from "../../interfaces/auth";
-import { dinHeader } from "../../utils/headerUtils";
 
 const useRegister = () => {
   const { handleRequest } = useAuthHandler();

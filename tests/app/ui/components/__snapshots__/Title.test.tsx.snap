@@ -1,0 +1,34 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Componente Title > renderiza correctamente como h1 1`] = `
+<DocumentFragment>
+  <h1
+    class="title title-secondary"
+    data-testid="title-component"
+  >
+    Título H1
+  </h1>
+</DocumentFragment>
+`;
+
+exports[`Componente Title > renderiza correctamente como h2 1`] = `
+<DocumentFragment>
+  <h2
+    class="title title-secondary"
+    data-testid="title-component"
+  >
+    Título H2
+  </h2>
+</DocumentFragment>
+`;
+
+exports[`Componente Title > renderiza correctamente con className personalizado 1`] = `
+<DocumentFragment>
+  <h3
+    class="custom-title title-secondary"
+    data-testid="title-component"
+  >
+    Título H3
+  </h3>
+</DocumentFragment>
+`;

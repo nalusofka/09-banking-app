@@ -11,7 +11,9 @@
 
     &_title {
         color: var.$color-gray;
+        display: flex;
         font-weight: var.$font-weight-light;
+        gap: 5px;
         margin-bottom: 10px;
     }
 
@@ -33,6 +35,12 @@
         color: var.$color-light-gray;
         font-weight: var.$font-weight-light;
         margin-bottom: 10px;
+    }
+
+    &_copy-btn {
+        border: inherit;
+        background: inherit;
+        cursor: pointer;
     }
 }
 

@@ -1,6 +1,6 @@
-import { HTTP_METHODS } from '../constants/httpMethods';
 import { AuthCreateRequest, AuthResponse, RegisterCreateRequest } from '@interfaces/auth';
 import { http } from './generals/http';
+import { HTTP_METHODS } from '@constants/httpMethods';
 
 const API_URL = import.meta.env.VITE_API_URL;
 const SYMMETRIC_KEY = import.meta.env.VITE_SYMMETRIC_KEY;

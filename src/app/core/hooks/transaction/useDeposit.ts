@@ -1,8 +1,8 @@
 import { useContext, useCallback } from "react";
-import { createDepositRequest, createDepositSuccess, createDepositFailure } from "../../state/transactions/actions";
-import { deposit } from "../../services/transaction.service";
-import { DepositRequest } from "../../interfaces/transaction";
-import { AppContext } from "../../state/AppContext";
+import { AppContext } from "@state/AppContext";
+import { createDepositRequest, createDepositSuccess, createDepositFailure } from "@state/transactions/actions";
+import { deposit } from "@services/transaction.service";
+import { DepositRequest } from "@interfaces/transaction";
 
 export const useDeposit = () => {
   const { dispatch } = useContext(AppContext)!;

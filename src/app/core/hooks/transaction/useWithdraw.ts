@@ -1,8 +1,8 @@
 import { useContext, useCallback } from "react";
-import { createWithdrawRequest, createWithdrawSuccess, createWithdrawFailure } from "../../state/transactions/actions";
-import { withdraw } from "../../services/transaction.service";
-import { WithdrawRequest } from "../../interfaces/transaction";
-import { AppContext } from "../../state/AppContext";
+import { AppContext } from "@state/AppContext";
+import { createWithdrawRequest, createWithdrawSuccess, createWithdrawFailure } from "@state/transactions/actions";
+import { withdraw } from "@services/transaction.service";
+import { WithdrawRequest } from "@interfaces/transaction";
 
 export const useWithdraw = () => {
   const { dispatch } = useContext(AppContext)!;

@@ -1,0 +1,12 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Componente Body > renderiza correctamente con el contenido proporcionado 1`] = `
+<DocumentFragment>
+  <p
+    class="body' body-secondary"
+    data-testid="body-component"
+  >
+    Contenido de prueba
+  </p>
+</DocumentFragment>
+`;

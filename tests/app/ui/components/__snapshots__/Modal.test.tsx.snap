@@ -1,0 +1,39 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Componente Modal > se renderiza correctamente cuando \`isOpen\` es \`true\` 1`] = `
+<DocumentFragment>
+  <div
+    class="modal-backdrop"
+  >
+    <div
+      class="modal"
+    >
+      <h4
+        class="title title-primary"
+        data-testid="title-component"
+      >
+        Título del Modal
+      </h4>
+      <br />
+      <p
+        class="body' body-primary"
+        data-testid="body-component"
+      >
+        Contenido del Modal
+      </p>
+      <div
+        class="modal-actions"
+      >
+        <button
+          aria-disabled="false"
+          class="modal-button"
+          data-testid="button-component"
+          type="button"
+        >
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

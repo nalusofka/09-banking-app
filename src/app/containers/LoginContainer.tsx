@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { AuthCredentials } from "@interfaces/auth";
-import Button from "../ui/components/Button";
-import Input from "../ui/components/Input";
-import LoginLayout from "../ui/layouts/LoginLayout";
-import Title from "../ui/components/Title";
-import Body from "../ui/components/Body";
 import { Link } from "react-router-dom";
-import { useAuth } from "../core/hooks/useAuth";
+import { useAuth } from "@hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import Body from "@components/Body";
+import Button from "@components/Button";
+import Input from "@components/Input";
+import LoginLayout from "@layouts/LoginLayout";
+import Title from "@components/Title";
 
 const LoginContainer: React.FC = () => {
   const navigate = useNavigate();

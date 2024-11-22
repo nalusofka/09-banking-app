@@ -1,5 +1,5 @@
 import React from 'react';
-import Nav from "../../components/Nav";
+import Nav from "@components/Nav";
 import './style.scss';
 
 const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -12,10 +12,10 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
   ];
 
   return (
-    <div className="account-layout-container">
+    <div className="dashboard-layout-container">
       <Nav links={links} />
 
-      <div className="account-layout-container_children">
+      <div className="dashboard-layout-container_children">
         {children}
       </div>
     </div>

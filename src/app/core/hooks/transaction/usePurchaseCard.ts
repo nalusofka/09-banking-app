@@ -1,8 +1,8 @@
 import { useContext, useCallback } from "react";
-import { createPurchaseCardRequest, createPurchaseCardSuccess, createPurchaseCardFailure } from "../../state/transactions/actions";
-import { purchaseCard } from "../../services/transaction.service";
-import { PurchaseCardRequest } from "../../interfaces/transaction";
-import { AppContext } from "../../state/AppContext";
+import { AppContext } from "@state/AppContext";
+import { createPurchaseCardRequest, createPurchaseCardSuccess, createPurchaseCardFailure } from "@state/transactions/actions";
+import { purchaseCard } from "@services/transaction.service";
+import { PurchaseCardRequest } from "@interfaces/transaction";
 
 export const usePurchaseCard = () => {
   const { dispatch } = useContext(AppContext)!;

@@ -1,20 +1,28 @@
-import React, { useState } from "react";
-import { useTransaction } from "../core/hooks/useTransaction";
-import { WithdrawRequest } from "../core/interfaces/transaction";
-import Input from "../ui/components/Input";
-import Button from "../ui/components/Button";
-import Title from "../ui/components/Title";
-import Body from "../ui/components/Body";
-import WithDrawLayout from "../ui/layouts/WithDrawLayout";
-import { dinHeader } from "../core/utils/headerUtils";
+import React, { useState, useEffect } from "react";
+import { dinHeader } from "@utils/headerUtils";
+import { useTransaction } from "@hooks/useTransaction";
+import { WithdrawRequest } from "@interfaces/transaction";
+import Body from "@components/Body";
+import Button from "@components/Button";
+import Input from "@components/Input";
+import Title from "@components/Title";
+import WithDrawLayout from "@layouts/WithDrawLayout";
 
 const WithDrawContainer: React.FC = () => {
   const { handleWithdraw } = useTransaction();
 
   const [withdrawRequest, setWithdrawRequest] = useState<WithdrawRequest>({
     dinHeader,
-    dinBody: { username: "", accountNumber: "", amount: 0 },
+    dinBody: { accountNumber: "", amount: 0 },
   });
+
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    const { accountNumber, amount } = withdrawRequest.dinBody;
+    const isValid = accountNumber.trim() !== "" && amount > 0;
+    setIsFormValid(isValid);
+  }, [withdrawRequest]);
 
   const handleWithdrawChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -37,11 +45,10 @@ const WithDrawContainer: React.FC = () => {
       <form onSubmit={submitWithdraw}>
         <Title as="h3" color="primary">Retiros</Title>
         <br />
-        <Body color="primary"> Realiza retiros rápidos en cajeros. Cada retiro tiene un coste de $U1.00</Body>
-        <Input color="primary" type="text" id="username" name="username" value={withdrawRequest.dinBody.username} onChange={handleWithdrawChange} required label="Nombre de usuario" />
+        <Body color="primary">Realiza retiros rápidos en cajeros. Cada retiro tiene un coste de $U1.00</Body>
         <Input color="primary" type="text" id="accountNumber" name="accountNumber" value={withdrawRequest.dinBody.accountNumber} onChange={handleWithdrawChange} required label="Número de cuenta" />
         <Input color="primary" type="number" id="amount" name="amount" value={withdrawRequest.dinBody.amount === 0 ? "" : withdrawRequest.dinBody.amount} onChange={handleWithdrawChange} required label="Monto" />
-        <Button type="submit">Retirar</Button>
+        <Button type="submit" disabled={!isFormValid}>Retirar</Button>
       </form>
     </WithDrawLayout>
   );

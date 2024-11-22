@@ -1,0 +1,41 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Componente Button > renderiza con className 1`] = `
+<DocumentFragment>
+  <button
+    aria-disabled="false"
+    class="custom-class"
+    data-testid="button-component"
+    type="button"
+  >
+    Click me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Componente Button > renderiza con el estado deshabilitado 1`] = `
+<DocumentFragment>
+  <button
+    aria-disabled="true"
+    class="custom-button"
+    data-testid="button-component"
+    disabled=""
+    type="button"
+  >
+    Click me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Componente Button > renderiza correctamente 1`] = `
+<DocumentFragment>
+  <button
+    aria-disabled="false"
+    class="custom-button"
+    data-testid="button-component"
+    type="button"
+  >
+    Click me
+  </button>
+</DocumentFragment>
+`;

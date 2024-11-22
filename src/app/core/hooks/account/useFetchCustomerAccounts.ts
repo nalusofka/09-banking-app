@@ -1,8 +1,8 @@
 import { useCallback, useContext } from 'react';
-import { getCustomerAccounts } from '../../services/account.service';
-import { fetchCustomerAccountsRequest, fetchCustomerAccountsSuccess, fetchCustomerAccountsFailure } from '../../state/account/actions';
-import { AppContext } from '../../state/AppContext';
-import { BankAccountCustomerGetRequest } from '../../interfaces/account';
+import { AppContext } from '@state/AppContext';
+import { BankAccountCustomerGetRequest } from '@interfaces/account';
+import { fetchCustomerAccountsRequest, fetchCustomerAccountsSuccess, fetchCustomerAccountsFailure } from '@state/account/actions';
+import { getCustomerAccounts } from '@services/account.service';
 
 export const useFetchCustomerAccounts = () => {
   const { dispatch } = useContext(AppContext)!;

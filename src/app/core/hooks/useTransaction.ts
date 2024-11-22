@@ -1,8 +1,8 @@
+import { useContext } from 'react';
 import { useWithdraw } from './transaction/useWithdraw';
 import { useDeposit } from './transaction/useDeposit';
 import { usePurchaseCard } from './transaction/usePurchaseCard';
-import { AppContext } from "../../core/state/AppContext";
-import { useContext } from 'react';
+import { AppContext } from "@state/AppContext";
 
 export const useTransaction = () => {
   const { state } = useContext(AppContext)!;

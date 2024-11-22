@@ -1,23 +1,48 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { encryptAES } from '../utils/encryptionUtils';
-import { HTTP_METHODS } from '../constants/httpMethods';
-import { WithdrawRequest, PurchaseCardRequest, DepositRequest, TransactionResponse } from '../interfaces/transaction';
-import { http } from './generals/http';
+import { encryptAES } from '@utils/encryptionUtils';
+import { HTTP_METHODS } from '@constants/httpMethods';
+import {
+  WithdrawRequest,
+  PurchaseCardRequest,
+  DepositRequest,
+  TransactionResponse,
+} from '@interfaces/transaction';
 
 const API_URL = import.meta.env.VITE_API_URL;
 const SYMMETRIC_KEY = import.meta.env.VITE_SYMMETRIC_KEY;
 const INITIALIZATION_VECTOR = import.meta.env.VITE_INITIALIZATION_VECTOR;
 
-const makeTransaction = async (url: string, payload: WithdrawRequest | PurchaseCardRequest | DepositRequest): Promise<TransactionResponse> => {
+const COMMON_HEADERS: HeadersInit = {
+  "Content-Type": "application/json",
+  "Authorization": `Bearer ${localStorage.getItem("token")}`,
+};
+
+const makeTransaction = async (
+  url: string,
+  payload: WithdrawRequest | PurchaseCardRequest | DepositRequest,
+): Promise<TransactionResponse> => {
+  const headers = { ...COMMON_HEADERS };
+
   try {
-    const response = await http(`${API_URL}${url}`, HTTP_METHODS.POST, payload)
-    return response.json()
+    const response = await fetch(`${API_URL}${url}`, {
+      method: HTTP_METHODS.POST.toString(),
+      headers,
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
   } catch (error: any) {
-    return error
+    console.error(error, "error");
+    throw error;
   }
 };
 
 export const withdraw = async (request: WithdrawRequest): Promise<TransactionResponse> => {
+  const username = localStorage.getItem("username");
 
   const payload = {
     dinHeader: {
@@ -30,11 +55,12 @@ export const withdraw = async (request: WithdrawRequest): Promise<TransactionRes
       initializationVector: INITIALIZATION_VECTOR,
     },
     dinBody: {
-      username: request.dinBody.username,
+      username,
       accountNumber: encryptAES(request.dinBody.accountNumber),
       amount: request.dinBody.amount,
     },
   };
+
   return makeTransaction('/api/v1/private/transactions/withdraw', payload);
 };
 
@@ -50,18 +76,18 @@ export const purchaseCard = async (request: PurchaseCardRequest): Promise<Transa
       initializationVector: INITIALIZATION_VECTOR,
     },
     dinBody: {
-      accountNumber: request.dinBody.accountNumber,
+      accountNumber: encryptAES(request.dinBody.accountNumber),
       amount: request.dinBody.amount,
-      type: request.dinBody.type,
-      purchaseType: request.dinBody.purchaseType,
+      purchaseType: request.dinBody.purchaseType, // PHYSICAL ONLINE
     },
   };
+
   return makeTransaction('/api/v1/private/transactions/purchase-card', payload);
 };
 
-// depositos
-
 export const deposit = async (request: DepositRequest): Promise<TransactionResponse> => {
+  const username = localStorage.getItem("username");
+
   const payload = {
     dinHeader: {
       device: request.dinHeader.device,
@@ -73,11 +99,12 @@ export const deposit = async (request: DepositRequest): Promise<TransactionRespo
       initializationVector: INITIALIZATION_VECTOR,
     },
     dinBody: {
-      accountNumber: request.dinBody.accountNumber,
+      accountNumber: encryptAES(request.dinBody.accountNumber),
       amount: request.dinBody.amount,
-      type: request.dinBody.type,
-      username: request.dinBody.username,
+      type: request.dinBody.type, // BRANCH ATM OTHER_ACCOUNT
+      username,
     },
   };
+
   return makeTransaction('/api/v1/private/transactions/deposit', payload);
 };

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { CustomerGetRequest } from '../interfaces/customer';
+import { CustomerGetRequest } from '@interfaces/customer';
 
 const API_URL = import.meta.env.VITE_API_URL;
 const SYMMETRIC_KEY = import.meta.env.VITE_SYMMETRIC_KEY;

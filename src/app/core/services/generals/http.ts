@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { HTTP_METHODS } from "../../constants/httpMethods";
+import { HTTP_METHODS } from "@constants/httpMethods";
 
 export const getAuthToken = (state: any) => state.auth.token;
 

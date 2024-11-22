@@ -6,9 +6,10 @@
         justify-content: space-between;
         margin-top: 20px;
         padding: 2rem;
-
+        padding-inline: 20vw;
+        
         @media (max-width: 768px) {
-            align-items: center;
+            padding-inline: 10vw;
             flex-direction: column;
         }
     }

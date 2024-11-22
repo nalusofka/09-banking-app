@@ -57,7 +57,7 @@ const Nav: React.FC<NavProps> = ({ links }) => {
         ))}
          {!isAuthRoute && (
           <li>
-            <button className='logout-button' onClick={handleLogout}>
+            <button className='logout-button' onClick={handleLogout} aria-label="Cerrar sesión">
               <IoIosLogOut size={20} color="white" />
             </button>
           </li>

@@ -10,7 +10,6 @@ export interface DinHeader {
 export interface WithdrawRequest {
   dinHeader: DinHeader;
   dinBody: {
-    username: string;
     accountNumber: string;
     amount: number;
   };
@@ -21,7 +20,6 @@ export interface PurchaseCardRequest {
   dinBody: {
     accountNumber: string;
     amount: number;
-    type: any;
     purchaseType: string;
   };
 }
@@ -50,3 +48,7 @@ export interface Transaction {
   amount: number;
   date: string;
 }
+
+export type TransactionType = 'BRANCH' | 'ATM' | 'OTHER_ACCOUNT';
+
+export type TransactionPurchaseType = 'PHYSICAL' | 'ONLINE';

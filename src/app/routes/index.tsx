@@ -7,6 +7,7 @@ import TransactionsContainer from "../containers/TransactionsContainer";
 import DepositsContainer from "../containers/DepositsContainer";
 import WithDrawContainer from "../containers/WithDrawContainer";
 import DashboardContainer from "../containers/DashboardContainer";
+import PurchaseContainer from "../containers/PurchaseContainer";
 
 export const router = createBrowserRouter([
   {
@@ -56,6 +57,16 @@ export const router = createBrowserRouter([
     )
   },
   {
+    path: '/compras',
+    element: (
+      <AppContextProvider>
+      <Guard>
+        <PurchaseContainer />
+      </Guard>
+    </AppContextProvider>
+    )
+  },
+  { 
     path: '/inicio',
     element: (
       <AppContextProvider>

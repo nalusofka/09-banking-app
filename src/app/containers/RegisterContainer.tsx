@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { RegisterCredentials } from "../core/interfaces/auth";
-import { useAuth } from "../core/hooks/useAuth";
-import Button from "../ui/components/Button";
-import Input from "../ui/components/Input";
-import Title from "../ui/components/Title";
-import Body from "../ui/components/Body";
 import { Link, useNavigate } from "react-router-dom";
-import RegisterLayout from "../ui/layouts/RegisterLayout";
+import { RegisterCredentials } from "@interfaces/auth";
+import { useAuth } from "@hooks/useAuth";
+import Body from "@components/Body";
+import Button from "@components/Button";
+import Input from "@components/Input";
+import RegisterLayout from "@layouts/RegisterLayout";
+import Title from "@components/Title";
 
 const RegisterContainer: React.FC = () => {
   const navigate = useNavigate();

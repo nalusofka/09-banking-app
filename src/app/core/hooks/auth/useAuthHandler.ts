@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCallback, useContext } from "react";
-import { AppContext } from "../../state/AppContext";
+import { AppContext } from "@state/AppContext";
 
 const useAuthHandler = () => {
   const { dispatch } = useContext(AppContext)!;

@@ -7,15 +7,18 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "paths": {
-      "@ui/*": ["./src/app/ui/*"],
       "@components/*": ["./src/app/ui/components/*"],
-      "@styles/*": ["./src/app/ui/styles/*"],
-      "@core/*": ["./src/app/core/*"],
+      "@constants/*": ["./src/app/core/constants/*"],
       "@containers/*": ["./src/app/containers/*"],
+      "@core/*": ["./src/app/core/*"],
+      "@hooks/*": ["./src/app/core/hooks/*"],
       "@interfaces/*": ["./src/app/core/interfaces/*"],
+      "@layouts/*": ["./src/app/ui/layouts/*"],
       "@services/*": ["./src/app/core/services/*"],
-      "@utils/*": ["./src/app/core/utils/*"],
-      "@state/*": ["./src/app/core/state/*"]
+      "@state/*": ["./src/app/core/state/*"],
+      "@styles/*": ["./src/app/ui/styles/*"],
+      "@ui/*": ["./src/app/ui/*"],
+      "@utils/*": ["./src/app/core/utils/*"]
     },
 
     /* Bundler mode */

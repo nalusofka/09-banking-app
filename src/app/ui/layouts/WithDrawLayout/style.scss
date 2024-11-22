@@ -4,5 +4,10 @@
         flex-direction: column;
         gap: 20px;
         padding: 2rem;
+        padding-inline: 20vw;
+        
+        @media (max-width: 768px) {
+            padding-inline: 10vw;
+        }
     }
 }

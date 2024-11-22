@@ -1,8 +1,8 @@
 import { useCallback, useContext } from 'react';
-import { deleteBankAccount } from '../../services/account.service';
-import { deleteBankAccountRequest, deleteBankAccountSuccess, deleteBankAccountFailure } from '../../state/account/actions';
-import { AppContext } from '../../state/AppContext';
-import { BankAccountDeleteRequest } from '../../interfaces/account';
+import { AppContext } from '@state/AppContext';
+import { BankAccountDeleteRequest } from '@interfaces/account';
+import { deleteBankAccount } from '@services/account.service';
+import { deleteBankAccountRequest, deleteBankAccountSuccess, deleteBankAccountFailure } from '@state/account/actions';
 
 export const useRemoveAccount = () => {
   const { dispatch } = useContext(AppContext)!;

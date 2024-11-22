@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useContext, useCallback } from 'react';
-import { AppContext } from '../state/AppContext';
-import { getCustomer } from '../services/customer.service';
-import { customerRequestRequest, customerRequestSuccess, customerRequestFailure } from '../state/customer/actions';
-import { dinHeader } from '../utils/headerUtils';
+import { AppContext } from '@state/AppContext';
+import { customerRequestRequest, customerRequestSuccess, customerRequestFailure } from '@state/customer/actions';
+import { dinHeader } from '@utils/headerUtils';
+import { getCustomer } from '@services/customer.service';
 
 export const useGetCustomer = () => {
   const context = useContext(AppContext);
