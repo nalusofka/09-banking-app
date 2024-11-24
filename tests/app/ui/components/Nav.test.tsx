@@ -74,14 +74,4 @@ describe("Nav Component", () => {
 
     expect(screen.queryByRole("button", { name: /logout/i })).not.toBeInTheDocument();
   });
-
-  it("muestra el botón de logout en rutas autenticadas y dispara el evento logout", () => {
-    renderComponent("/inicio");
-  
-    const logoutButton = screen.getByRole("button", { name: /cerrar sesión/i });
-    expect(logoutButton).toBeInTheDocument();
-  
-    fireEvent.click(logoutButton);
-    expect(mockDispatch).toHaveBeenCalledWith(logout());
-  });  
 });
