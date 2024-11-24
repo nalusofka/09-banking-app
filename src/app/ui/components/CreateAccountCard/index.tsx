@@ -9,6 +9,7 @@ interface Account {
   accountId: string;
   accountNumber: number;
   amount: number;
+  deleted: boolean;
 }
 
 interface CreateAccountCardProps {
@@ -61,7 +62,7 @@ const CreateAccountCard: React.FC<CreateAccountCardProps> = ({ accounts = [], on
 
   return (
     <div className="create-account-card">
-      {accounts.map((account) => (
+      {accounts.filter(account => account.deleted === false).map((account) => (
         <div key={account.accountNumber} className="create-account-card_content">
           <div>
             <Title as="h4" className="create-account-card_title">

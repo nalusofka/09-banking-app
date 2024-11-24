@@ -36,10 +36,11 @@ const DashboardContainer: React.FC = () => {
       (async () => {
         try {
           const { dinBody } = await handleFetchCustomerAccounts({ dinHeader, dinBody: { id: customerId } });
-          setAccounts(dinBody.map(({ id, number, amount }: { id: string, number: string, amount: number }) => ({
+          setAccounts(dinBody.map(({ id, number, amount, deleted }: { id: string, number: string, amount: number, deleted: boolean }) => ({
             accountId: id,
             accountNumber: number,
             amount,
+            deleted
           })));
         } catch (error) {
           return error;
@@ -63,7 +64,7 @@ const DashboardContainer: React.FC = () => {
     const accountToDelete = accounts.find((account) => account.accountNumber === accountNumber);
         try {
         await handleRemoveAccount({ dinHeader, dinBody: { id: accountToDelete.accountId } });
-        setRefresh(!refresh);
+        setRefresh(!refresh);        
       } catch (error) {
         return error;
       }
