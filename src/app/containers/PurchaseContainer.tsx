@@ -10,6 +10,7 @@ import CustomSelect from "@components/Select";
 import DepositsLayout from "@layouts/DepositsLayout";
 import Input from "@components/Input";
 import Title from "@components/Title";
+import Toast from "@components/Toast"
 
 const PurchaseContainer: React.FC = () => {
   const { handlePurchaseCard } = useTransaction();
@@ -20,6 +21,7 @@ const PurchaseContainer: React.FC = () => {
   });
 
   const [isFormValid, setIsFormValid] = useState(false);
+  const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
 
   useEffect(() => {
     const { accountNumber, amount, purchaseType } = purchaseRequest.dinBody;
@@ -28,11 +30,24 @@ const PurchaseContainer: React.FC = () => {
 
   const submitPurchase = async (e: React.FormEvent) => {
     e.preventDefault();
-    await handlePurchaseCard(purchaseRequest);
+    try {
+      await handlePurchaseCard(purchaseRequest);
+      showToast("Compra realizada con éxito", "success");
+    } catch (error) {
+      showToast("Error al realizar la compra", "error");
+    }
+  };
+
+  const showToast = (message: string, type: "success" | "error") => {
+    setToast({ message, type });
+    setTimeout(() => {
+      setToast(null);
+    }, 3000);
   };
 
   return (
     <DepositsLayout>
+      {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
       <form onSubmit={submitPurchase}>
         <Title as="h3" color="primary">Compras</Title>
         <br />

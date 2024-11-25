@@ -3,7 +3,6 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AppContextProvider } from "../../../../src/app/core/state/AppContext";
 import Nav from "../../../../src/app/ui/components/Nav";
-import { logout } from "../../../../src/app/core/state/auth/actions";
 import React from "react";
 import "@testing-library/jest-dom";
 

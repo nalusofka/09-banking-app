@@ -7,6 +7,7 @@ import Button from "@components/Button";
 import Input from "@components/Input";
 import Title from "@components/Title";
 import WithDrawLayout from "@layouts/WithDrawLayout";
+import Toast from "@components/Toast"
 
 const WithDrawContainer: React.FC = () => {
   const { handleWithdraw } = useTransaction();
@@ -17,6 +18,7 @@ const WithDrawContainer: React.FC = () => {
   });
 
   const [isFormValid, setIsFormValid] = useState(false);
+  const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
 
   useEffect(() => {
     const { accountNumber, amount } = withdrawRequest.dinBody;
@@ -37,11 +39,24 @@ const WithDrawContainer: React.FC = () => {
 
   const submitWithdraw = async (e: React.FormEvent) => {
     e.preventDefault();
-    await handleWithdraw(withdrawRequest);
+    try {
+      await handleWithdraw(withdrawRequest);
+      showToast("Retiro realizado con éxito", "success");
+    } catch (error) {
+      showToast("Error al realizar el retiro", "error");
+    }
+  };
+
+  const showToast = (message: string, type: "success" | "error") => {
+    setToast({ message, type });
+    setTimeout(() => {
+      setToast(null);
+    }, 3000);
   };
 
   return (
     <WithDrawLayout>
+      {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
       <form onSubmit={submitWithdraw}>
         <Title as="h3" color="primary">Retiros</Title>
         <br />

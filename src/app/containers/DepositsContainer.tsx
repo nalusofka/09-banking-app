@@ -8,7 +8,8 @@ import CustomSelect from "@components/Select";
 import DepositsLayout from "@layouts/DepositsLayout";
 import Input from "@components/Input";
 import Title from "@components/Title";
-import { decryptAES, encryptAES } from "@core/utils/encryptionUtils";
+import Toast from "@components/Toast"
+import { purchaseOptions } from "@constants/select";
 
 const DepositsContainer: React.FC = () => {
   const { handleDeposit } = useTransaction();
@@ -19,21 +20,7 @@ const DepositsContainer: React.FC = () => {
   });
 
   const [isFormValid, setIsFormValid] = useState(false);
-
-  const options = [
-    { value: "ATM", label: "ATM" },
-    { value: "BRANCH", label: "BRANCH" },
-    { value: 'OTHER_ACCOUNT', label: 'OTHER_ACCOUNT'}
-  ];
-
-  useEffect(() => { 
-    const accountNumber = "1234567890";
-    const encryptedAccountNumber = encryptAES(accountNumber);
-    console.log("Encrypted Account Number:", encryptedAccountNumber);
-    
-    const decryptedAccountNumber = decryptAES(encryptedAccountNumber);
-    console.log("Decrypted Account Number:", decryptedAccountNumber); 
-    }, []);
+  const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
 
   useEffect(() => {
     const { accountNumber, amount, type } = depositRequest.dinBody;
@@ -51,7 +38,12 @@ const DepositsContainer: React.FC = () => {
 
   const submitDeposit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await handleDeposit(depositRequest);
+    try {
+      await handleDeposit(depositRequest);
+      showToast("Depósito realizado con éxito", "success");
+    } catch (error) {
+      showToast("Error al realizar el depósito", "error");
+    }
   };
 
   const handleSelectChange = (selectedOption: { value: string } | null) => {
@@ -61,8 +53,16 @@ const DepositsContainer: React.FC = () => {
     }));
   };
 
+  const showToast = (message: string, type: "success" | "error") => {
+    setToast({ message, type });
+    setTimeout(() => {
+      setToast(null);
+    }, 3000);
+  };
+
   return (
     <DepositsLayout>
+      {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
       <form onSubmit={submitDeposit}>
         <Title as="h3" color="primary">Depósitos</Title>
         <br />
@@ -72,7 +72,7 @@ const DepositsContainer: React.FC = () => {
         <Body color="primary"><b>Desde cajero:</b> $U2.00</Body>
         <Body color="primary"><b>Desde otra cuenta:</b> $U1.5</Body>
         <br />
-        <CustomSelect value={ depositRequest.dinBody.type ? { value: depositRequest.dinBody.type, label: depositRequest.dinBody.type } : null} onChange={handleSelectChange} options={options} />
+        <CustomSelect value={ depositRequest.dinBody.type ? { value: depositRequest.dinBody.type, label: depositRequest.dinBody.type } : null} onChange={handleSelectChange} options={purchaseOptions} />
         <Input color="primary" type="text" id="accountNumber" name="accountNumber" value={depositRequest.dinBody.accountNumber} onChange={handleDepositChange} required label="Número de cuenta" />
         <Input color="primary" type="number" id="amount" name="amount" value={depositRequest.dinBody.amount === 0 ? "" : depositRequest.dinBody.amount} onChange={handleDepositChange} required label="Monto" />
         <Button type="submit" disabled={!isFormValid}>Depositar</Button>
